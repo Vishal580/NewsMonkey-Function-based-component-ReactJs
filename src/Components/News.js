@@ -9,7 +9,6 @@ const News = (props) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalResults, setTodalResults] = useState(0);
-  // document.title = `${props.category} - NewsMonkey`;
 
   const updateNews = async() => {
     props.setProgress(20);
@@ -27,7 +26,9 @@ const News = (props) => {
   }
 
   useEffect (() =>{
+    document.title = `${props.category} - NewsMonkey`;
     updateNews();
+    // eslint-disable-next-line
   }, [])
 
   // const handlePrevclick = async () => {
@@ -41,8 +42,8 @@ const News = (props) => {
   // };
 
   const fetchMoreData = async () => {
+    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
     setPage(page + 1);
-    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
     let data = await fetch(url);
     let parsedata = await data.json();
     setArticles(articles.concat(parsedata.articles));
@@ -51,7 +52,7 @@ const News = (props) => {
 
   return (
     <>
-      <h1 className="text-center">
+      <h1 className="text-center" style={{marginTop: '80px'}}>
         NewsMonkey - Top {props.category} Headlines
       </h1>
       {loading && <Spinner/>}
@@ -88,12 +89,6 @@ const News = (props) => {
     </>
     )
 }
-
-News.defaultProps = {
-  country: "us",
-  pageSize: "6",
-  category: "sports",
-};
 
 News.PropType = {
   country: PropTypes.string,

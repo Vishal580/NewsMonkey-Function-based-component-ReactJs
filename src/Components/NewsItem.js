@@ -4,9 +4,9 @@ const NewsItem = (props) => {
     let {title, description, imageUrl, newsUrl, author, publishedAt, source} = props; //destructuring
     return (
       <div className='my-3'>
-        <div className="card">
+        <div className="card border-danger mb-3">
             <div className="container">
-              <span className="badge rounded-pill bg-danger" style={{display: 'flex', justifyContent: 'flex-end', position: 'absolute', right: '0'}}>{source}</span>
+              <span className="badge rounded-pill bg-danger" style={{display: 'flex', justifyContent: 'flex-end', position: 'absolute', right: '10px', top: '10px'}}>{source}</span>
             </div>
             <img src={!imageUrl?"https://assets-prd.ignimgs.com/2024/06/03/eldenring-shadow-fp-blogroll-1717445459923.jpg?width=1280":imageUrl} className="card-img-top" alt="..."/>
             <div className="card-body">
